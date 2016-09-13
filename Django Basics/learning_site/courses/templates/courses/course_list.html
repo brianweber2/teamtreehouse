@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}Available Courses{% endblock %}
+
+{% block content %}
+<div class="cards">
+    {% for course in courses %}
+    <div class="card">
+        <header><a href="{% url 'courses:detail' pk=course.pk %}">{{ course.title }}</a></header>
+        <div class="card-copy">
+            {{ course.description }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
