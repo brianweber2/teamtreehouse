@@ -1,0 +1,21 @@
+{% load static from staticfiles %}
+{% load course_extras %}
+
+<!doctype html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+        {% block static %}{% endblock %}
+    </head>
+    <body>
+        <div class="site-container">
+            <div>{% nav_courses_list %}</div>
+            <nav>
+                <a href="{% url 'views.hello_world' %}">Home</a>
+                <a href="{% url 'courses:list' %}">Courses</a>
+            </nav>
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
