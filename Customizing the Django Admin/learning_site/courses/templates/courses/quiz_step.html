@@ -1,0 +1,37 @@
+{% extends "courses/layout.html" %}
+
+{% block title %}{{ step.title }} | {{ step.course.title }} {{ block.super }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="{% url 'courses:detail' pk=step.course.pk %}">{{ step.course.title }}</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="row columns">
+        <article>
+            {{ block.super }}
+            <h1>{{ step.title }}</h1>
+            <ul class="no-bullet">
+            {% for question in step.question_set.all %}
+                <li>
+                    <h3 class="subheader">{{ question.prompt }}</h3>
+                    {% for answer in question.answer_set.all %}
+                        <div class="callout {% if answer.correct and user.is_superuser%}success{% endif %}">{{ answer.text }}</div>
+                    {% endfor %}
+                    {% if user.is_superuser %}
+                        <a href="{% url 'courses:edit_question' question_pk=question.pk quiz_pk=step.pk %}" class="tiny button">Edit Question</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        {% if user.is_superuser %}
+            <hr>
+            <div class="button-group">
+                <a href="{% url 'courses:edit_quiz' course_pk=step.course_id quiz_pk=step.pk %}" class="small button">Edit Quiz</a>
+                <a href="{% url 'courses:create_question' quiz_pk=step.pk question_type='mc' %}" class="small button">Add Multiple Choice</a>
+                <a href="{% url 'courses:create_question' quiz_pk=step.pk question_type='tf' %}" class="small button">Add True/False</a>
+            </div>
+        {% endif %}
+        </article>
+    </div>
+{% endblock %}
