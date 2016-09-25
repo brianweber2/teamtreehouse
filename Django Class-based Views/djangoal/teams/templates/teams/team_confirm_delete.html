@@ -1,0 +1,10 @@
+{% extends "teams/_layout.html" %}
+
+{% block body_content %}
+<h1>Delete {{ team.name }}?</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-danger" value="Delete"> <a href="{% url 'teams:detail' pk=team.pk %}">Cancel</a>
+</form>
+{% endblock %}

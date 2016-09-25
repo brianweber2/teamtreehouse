@@ -1,0 +1,11 @@
+{% extends "teams/_layout.html" %}
+
+{% block body_content %}
+<h1>{{ page_title }}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary" value="Save">
+</form>
+{% endblock %}

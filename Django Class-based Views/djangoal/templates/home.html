@@ -1,0 +1,15 @@
+{% extends "_layout.html" %}
+
+{% block sidebar %}{% endblock %}
+
+{% block body_content %}
+<div class="jumbotron">
+	<h1>Goal!</h1>
+	<p>This is the easiest way to keep track of your soccer team(s) and players!</p>
+	<p>
+		<a href="#" role="button" class="btn btn-default btn-lg">Sign up</a> or
+		<a href="#" role="button" class="btn btn-default btn-lg">Log in</a>
+	</p>
+    <p>There {{ games_today|pluralize:"is, are" }} {{ games_today }} game{{ games_today|pluralize }} today!</p>
+</div>
+{% endblock %}
