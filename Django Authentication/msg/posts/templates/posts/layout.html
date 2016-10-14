@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title_tag %}Posts | {{ block.super }}{% endblock %}
+
+{% block wrapper_class %}posts-wrapper{% endblock %}
+
+{% block body_content %}
+<div class="posts-page">
+	<div class="container">
+		<div class="row">
+			{% block pre_post_content %}{% endblock %}
+			{% block post_content %}{% endblock %}
+			{% block post_post_content %}{% endblock %}
+		</div>
+	</div>
+</div>
+{% endblock %}

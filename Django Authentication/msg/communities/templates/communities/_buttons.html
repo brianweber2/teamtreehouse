@@ -1,0 +1,5 @@
+{% if in_community %}
+<a href="{% url 'communities:leave' slug=community.slug %}" class="btn btn-simple"><span class="glyphicon glyphicon-remove-circle"></span> Leave</a>
+{% else %}
+<a href="{% url 'communities:join' slug=community.slug %}" class="btn btn-simple"><span class="glyphicon glyphicon-ok-circle"></span> Join</a>
+{% endif %}

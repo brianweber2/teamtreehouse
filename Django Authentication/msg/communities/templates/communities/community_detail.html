@@ -1,0 +1,48 @@
+{% extends "communities/layout.html" %}
+{% load community_tags %}
+
+{% block pre_community_content %}
+<div class="col-md-4">
+	<div class="card card-with-shadow">
+		<div class="content">
+			<h5 class="title">{{ community.name }}</h5>
+			{{ community.description_html|safe }}
+			{% community_buttons community %}
+		</div>
+	</div>
+    
+  <div class="card card-with-shadow">
+   	 <div class="content">
+   		 <h5 class="title">Members</h5>
+   		 <ul class="list-unstyled">
+   			 {% for membership in community.good_members %}
+   			 <li class="row">
+   				 <a href="{% url "posts:for_user" username=membership.user.username %}" class="col-md-9">{{ membership.user.display_name }}</a>
+   				 <div class="col-md-3 text-right">
+   					 {% if user.id in community.admins or user.id in community.moderators %}
+   					 {% if membership.user.id in community.moderators %}
+   					 <a href="{% url "communities:change_status" slug=community.slug user_id=membership.user.id status=1 %}"><i class="glyphicon glyphicon-thumbs-down text-warning"></i></a>
+   					 {% endif %}
+   					 {% if membership.user.id not in community.moderators and membership.user.id not in community.admins %}
+   					 <a href="{% url "communities:change_status" slug=community.slug user_id=membership.user.id status=2 %}"><i class="glyphicon glyphicon-thumbs-up text-warning"></i></a>
+   					 {% endif %}
+   					 {% if perms.communities.ban_member %}
+   					 <a href="{% url "communities:change_status" slug=community.slug user_id=membership.user.id status=0 %}"><i class="glyphicon glyphicon-ban-circle text-danger"></i></a>
+   					 {% endif %}
+   					 {% endif %}
+   				 </div>
+   			 </li>
+   			 {% endfor %}
+   		 </ul>
+   	 </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block community_content %}
+<div class="col-md-8">
+	{% for post in community.posts.all %}
+		{% include "posts/_post.html" %}
+	{% endfor %}
+</div>
+{% endblock %}

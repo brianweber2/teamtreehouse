@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+
+{% block body_content %}
+			<div class="landing-header" style="background-image: url('{% static "img/jump.jpg" %}');">
+				<div class="container">
+					<div class="motto">
+						<h1 class="title-uppercase">MSG</h1>
+						<h3>The newest social network around!</h3>
+						<br />
+						<a class="btn" href="#">Sign Up</a>
+					</div>
+				</div>
+			</div>
+			<div class="main">
+				<div class="section text-center landing-section">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-8 col-md-offset-2">
+								<h2>Are you tired of your current social network?</h2>
+								<h5>Then join a new one! Nothing's better than starting over!</h5>
+								<br />
+								<a href="#" class="btn btn-danger btn-fill">Sign Up!</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="section section-light-brown landing-section">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-4 column">
+								<h4>Messages</h4>
+								<p>You can post messages to the network! They'll be seen by other members.</p>
+								<a class="btn btn-danger btn-simple" href="#">Sign Up!</a>
+							</div>
+							<div class="col-md-4 column">
+								<h4>Communities</h4>
+								<p>Communities are where people with similar interests can have conversations. They're like Twitter's hashtags but different! They're also kind of like sub-Reddits but, hopefully, without the horribleness. Wait, we don't want Twitter's horribleness either. Oh no! We're doomed!</p>
+								<a class="btn btn-danger btn-simple" href="#">Sign Up!</a>
+							</div>
+							<div class="col-md-4 column">
+								<h4>You</h4>
+								<p>We'll never be able to make a profit on this site unless you give us information we can collect and sell! Do your part today!</p>
+								<a class="btn btn-danger btn-simple" href="#">Sign Up!</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "courses/layout.html" %}
+{% load course_extras %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
+{% block content %}
+    <div class="row columns">
+        {{ block.super }}
+        <article>
+            <h1 class="">{{ course.title }}</h1>
+
+            <div class="callout secondary">
+                {{ course.description|markdown_to_html }}
+            </div>
+
+            <dl>
+                {% for step in steps %}
+                    <dt>
+                        <a href="{{ step.get_absolute_url }}">{{ step.title }}</a>
+                    </dt>
+                    <dd>{{ step.description|markdown_to_html }}</dd>
+                {% endfor %}
+            </dl>
+        </article>
+        {% if user.is_superuser %}
+            <hr>
+            <a href="{% url 'courses:create_quiz' course_pk=course.pk %}" class="small button">Add Quiz</a>
+        {% endif %}
+    </div>
+{% endblock %}

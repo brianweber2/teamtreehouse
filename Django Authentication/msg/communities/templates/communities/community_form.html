@@ -1,0 +1,11 @@
+{% extends "communities/layout.html" %}
+{% load bootstrap3 %}
+
+{% block community_content %}
+<h4>New community</h4>
+<form method="POST" action="{% url 'communities:create' %}" id="communityForm">
+	{% csrf_token %}
+	{% bootstrap_form form %}
+	<input type="submit" value="Create" class="btn btn-primary btn-large">
+</form>
+{% endblock %}

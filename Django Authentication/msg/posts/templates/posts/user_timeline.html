@@ -1,0 +1,17 @@
+{% extends "posts/layout.html" %}
+
+{% block pre_post_content %}
+<div class="col-md-4">
+	<h4>{{ post_user.get_short_name }}</h4>
+    <strong>@{{ post_user.username }}</strong>
+    {{ post_user.bio }}
+</div>
+{% endblock %}
+
+{% block post_content %}
+<div class="col-md-8">
+	{% for post in post_list %}
+		{% include "posts/_post.html" %}
+	{% endfor %}
+</div>
+{% endblock %}

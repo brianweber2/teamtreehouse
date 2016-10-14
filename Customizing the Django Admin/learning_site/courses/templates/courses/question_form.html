@@ -1,0 +1,68 @@
+{% extends "courses/layout.html" %}
+
+{% block title %}
+    {{ block.super }}
+    {% if form.instance.pk %}
+        {{ form.instance.prompt }}
+    {% else %}
+        New question
+    {% endif %}
+{% endblock %}
+
+{% block css %}
+    {{ form.media.css }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="{% url 'courses:quiz_step' course_pk=quiz.course_id step_pk=quiz.pk %}">{{ quiz.title }}</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="row columns">
+        {{ block.super }}
+    </div>
+    <div class="row columns">
+        <form method="POST" class="small-12">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {{ formset.management_form }}
+            <table role="grid" class="stack hover" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th scope="col" class="text-center" style="width:10%">Order</th>
+                        <th scope="col">Text</th>
+                        <th scope="col" class="text-center" style="width:10%">Correct?</th>
+                        <th scope="col" class="text-center" style="width:10%">Delete?</th>
+                    </tr>
+                </thead>
+                <tbody class="order">
+                    {% for form in formset %}
+                        <tr class="answer-form {% if form.instance.pk %}item{% else %}new{% endif %}">
+                            <td>{{ form.id }}{{ form.order }}</td>
+                            <td>{{ form.text }}</td>
+                            <td class="text-center">{{ form.correct }}</td>
+                            {% if form.instance.pk %}
+                                <td class="text-center">{{ form.DELETE }}</td>
+                            {% else %}
+                                <td class="text-center"></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <input type="submit" class="button" value="Save">
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {% load static from staticfiles %}
+    {{ form.media.js }}
+    <script src="{% static 'js/vendor/jquery.formset.js' %}"></script>
+    <script>
+        $('.answer-form').formset({
+            addText: 'add answer',
+            deleteText: 'remove'
+        });
+    </script>
+{% endblock %}
