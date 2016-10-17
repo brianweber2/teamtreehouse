@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!-- Display user's username, total posts, total followers and following total. -->
+<div class="row">
+	<div class="grid-25">
+		<h1>{{ user.username }}</h1>
+	</div>
+	<div class="grid-50">
+		<div class="grid-33">
+			<h5>Posts</h5>
+			<p>{{ user.posts.count() }}</p>
+		</div>
+		<div class="grid-33">
+			<h5>Followers</h5>
+			<p>{{ user.followers().count() }}</p>
+		</div>
+		<div class="grid-33">
+			<h5>Following</h5>
+			<p>{{ user.following().count() }}</p>
+		</div>
+	</div>
+	<div class="grid-25">
+		<!-- Follow/unfollow button -->
+		{% if current_user.is_authenticated %}
+			{% if user != current_user %}
+				{% if not user in current_user.following() %}
+					<a href="{{ url_for('follow', username=user.username) }}">Follow</a>
+				{% else %}
+					<a href="{{ url_for('unfollow', username=user.username) }}">Unfollow</a>
+				{% endif %}
+			{% endif %}
+		{% endif %}
+
+	</div>
+	{% block user_profile %}
+		<!-- Display link to update profile information here. -->
+		<a href="{{ url_for('update_profile', username=user.username) }}"><button>Update Profile</button></a>
+	{% endblock %}
+</div>
+
+<!-- Display all posts by current user here. -->
+{% for post in stream %}
+	<article>
+	<h2>
+		<a href="{{ url_for('stream', username=post.user.username) }}">{{ post.user.username }}</a>
+	</h2>
+	<i class="clock"></i><time data-time="{{ post.timestamp }}" class="distime" datetime="{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</time> <a href="{{ url_for('view_post', post_id=post.id) }}" class="view">View</a>
+	<div class="post">
+		{{ post.content }}
+	</div>
+	</article>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "profile.html" %}
+{% from 'macros.html' import render_field %}
+
+{% block user_profile %}
+
+<!-- Update user information -->
+<form method="POST" action="" class="form">
+	{% for field in form %}
+		{{ field.label }}
+		{{ render_field(field) }}
+	{% endfor %}
+	<button type="submit" id="submit">Update!</button>
+</form>
+<a href="{{ url_for('reset_password') }}">Reset password</a>
+
+{% endblock %}
