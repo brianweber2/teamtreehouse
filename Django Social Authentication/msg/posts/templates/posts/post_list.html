@@ -1,0 +1,43 @@
+{% extends "posts/layout.html" %}
+{% load community_tags %}
+
+{% block pre_post_content %}
+<div class="col-md-4">
+	{% if request.user.is_authenticated %}
+	<div class="card card-with-shadow">
+		<div class="content">
+			<h5 class="title">Your Communities</h5>
+			<ul class="list-unstyled">
+				{% get_user_communities as user_communities %}	
+				{% for member_community in user_communities %}
+				<li class="community li-with-bullet">
+					<a href="{% url 'communities:single' slug=member_community.community.slug %}">{{ member_community.community.name }}</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	{% endif %}
+	<div class="card card-with-shadow">
+		<div class="content">
+			<h5 class="title">All Communities</h5>
+			<ul class="list-unstyled">
+				{% get_other_communities as other_communities %}	
+				{% for other_community in other_communities %}
+					<li class="community li-with-bullet"><a href="{% url 'communities:single' slug=other_community.slug %}">{{ other_community.name }}</a></li>
+				{% endfor %}
+			</ul>
+			{% if user.is_authenticated %}
+			<a href="{% url 'communities:create' %}" class="btn btn-sm btn-fill btn-danger"><span class="glyphicon glyphicon-plus-sign"></span> New community</a>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}
+{% block post_content %}
+<div class="col-md-8">
+	{% for post in post_list %}
+		{% include "posts/_post.html" %}
+	{% endfor %}
+</div>
+{% endblock %}

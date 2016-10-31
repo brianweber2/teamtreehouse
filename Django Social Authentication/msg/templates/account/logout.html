@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block body_content %}
+<div class="container">
+	<h1>Log out</h1>
+
+	<p>Are you sure you want to log out?</p>
+
+	<form method="post">
+		{% csrf_token %}
+		<button class="btn btn-primary" type="submit">Log out</button>
+	</form>
+</div>
+{% endblock %}

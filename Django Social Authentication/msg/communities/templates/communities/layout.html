@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title_tag %}Communities | {{ block.super }}{% endblock %}
+
+{% block wrapper_class %}communities-wrapper{% endblock %}
+
+{% block body_content %}
+<div class="communities-page">
+	<div class="container">
+		<div class="row">
+			{% block pre_community_content %}{% endblock %}
+			{% block community_content %}{% endblock %}
+			{% block post_community_content %}{% endblock %}
+		</div>
+	</div>
+</div>
+{% endblock %}
