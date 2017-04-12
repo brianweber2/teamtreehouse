@@ -1,0 +1,48 @@
+{
+  "name": "photoblog",
+  "scripts": {
+    "postinstall": "npm run build",
+    "serve": "webpack-dev-server --config config/develop.config.js --inline --progress --port 8080",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "@angular/common": "2.4.2",
+    "@angular/compiler": "2.4.2",
+    "@angular/core": "2.4.2",
+    "@angular/forms": "2.4.2",
+    "@angular/http": "2.4.2",
+    "@angular/platform-browser": "2.4.2",
+    "@angular/platform-browser-dynamic": "2.4.2",
+    "angular-in-memory-web-api": "0.2.4",
+    "core-js": "2.4.1",
+    "ie-shim": "0.1.0",
+    "rxjs": "5.0.3",
+    "zone.js": "0.7.4"
+  },
+  "devDependencies": {
+    "@types/core-js": "0.9.35",
+    "@types/node": "6.0.59",
+    "angular2-template-loader": "0.6.0",
+    "awesome-typescript-loader": "3.0.0-beta.18",
+    "css-loader": "0.26.1",
+    "extract-text-webpack-plugin": "1.0.1",
+    "file-loader": "0.9.0",
+    "html-loader": "0.4.4",
+    "html-webpack-plugin": "2.26.0",
+    "json-loader": "0.5.4",
+    "raw-loader": "0.5.1",
+    "script-loader": "0.7.0",
+    "source-map-loader": "0.1.5",
+    "style-loader": "0.13.1",
+    "to-string-loader": "1.1.5",
+    "ts-loader": "1.3.3",
+    "tslint": "4.3.1",
+    "tslint-loader": "3.3.0",
+    "typescript": "2.1.4",
+    "uglify": "0.1.5",
+    "uglify-loader": "1.4.0",
+    "webpack": "1.14.0",
+    "webpack-dev-server": "1.16.2",
+    "webpack-merge": "2.3.1"
+  }
+}
